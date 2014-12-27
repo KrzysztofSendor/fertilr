@@ -46,17 +46,19 @@
 							<th>login</th>
 						</tr>
 						<?php
-						if(!isset($_GET['page']) || !is_numeric($_GET['page'])){
+						if(!isset($_GET['p']) || !is_numeric($_GET['p'])){
 							$page = 0;
 						} else {
-							$page = (int)$_GET['page'];
+							$page = (int)$_GET['p'];
 						}
 						$sql = mysql_query("SELECT id_uzytkownik, login, imie, nazwisko, admin FROM `Uzytkownicy` LIMIT $page, 10");
 						$num = mysql_num_rows($sql);
 						if($num>0){
 							for($i=0; $i<$num; $i++){
 								$row = mysql_fetch_row($sql);
-								echo"<tr>";
+								echo"<tr
+								
+								>";
 								echo"<td>$row[0]</td>";
 								echo"<td>$row[2]</td>";
 								echo"<td>$row[3]</td>";
@@ -64,13 +66,21 @@
 								echo"</tr>";
 							}
 						}
-						echo'<a href="'.$_SERVER['PHP_SELF'].'?page='.($page+10).'">Next</a>';
-						$prev = $page - 10;
-						if($prev >= 0) echo'<a href="'.$_SERVER['PHP_SELF'].'?page='.$prev.'">Previous</a>';
-						
 						?>
 					</table>
 				</div>
+				<nav>
+					<ul class="pager">
+						<li class="previous <?php 
+							if($page==0) echo(disabled);
+							else echo(active);
+						?>"><a href="users.php?p=<?php echo($page-10); ?>" aria-label="Previous"><span aria-hidden="true">&larr;</span> Poprzednie</a></li>
+						<li class="next <?php
+							if($page >= $num) echo(disabled);
+							else echo(active);
+						?>"><a href="users.php?p=<?php echo($page+10); ?>" aria-label="Next">Następne <span aria-hidden="true">&rarr;</span></a></li>
+					</ul>
+				</nav>
 			</div>
 			<div class="col-md-2 col-sm-10 col-sm-offset-1">
 				<div class="well">
@@ -90,6 +100,16 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Nie</button>
 					<button type="button" class="btn btn-success" onclick="location.href='../index.php?logout'">Tak</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserModal" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-body">
+					
 				</div>
 			</div>
 		</div>
