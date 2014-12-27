@@ -69,17 +69,13 @@
 							} else {
 					?>
 					<div class="alert alert-danger" role="alert">Błędne dane logowania</div>
-					<form action="index.php">
-						<button type="submit" class="btn btn-default">Wróć do logowania</button>
-					</form>
+					<button type="submit" class="btn btn-default" onclick="location.href='index.php'">Wróć do logowania</button>
 					<?php
 							}
 						} else {
 					?>
 					<div class="alert alert-danger" role="alert">Brak danych logowania</div>
-					<form action="index.php">
-						<button type="submit" class="btn btn-default">Wróć do logowania</button>
-					</form>
+					<button type="submit" class="btn btn-default" onclick="location.href='index.php'">Wróć do logowania</button>
 					<?php
 						}
 					}
@@ -88,9 +84,7 @@
 						$_SESSION['auth'] = '';
 					?>
 					<div class="alert alert-success" role="alert">Wylogowano</div>
-					<form action="index.php">
-						<button type="submit" class="btn btn-default">Wróć do logowania</button>
-					</form>
+					<button type="submit" class="btn btn-default" onclick="location.href='index.php'">Wróć do logowania</button>
 					<?php
 					}
 					elseif ($_SESSION['auth'] == TRUE && $_SESSION['admin'] == TRUE) header("Location: admin.php");
