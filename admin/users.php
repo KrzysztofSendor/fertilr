@@ -82,6 +82,15 @@
 				</div>
 				<?php
 				}
+				elseif(isset($_SESSION['tmp']) && $_SESSION['tmp'] == 'edited'){
+					$_SESSION['tmp'] = '';
+				?>
+				<div class="alert alert-success alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<strong>Sukces!</strong> Dane użytkownika zostały zmienione.
+				</div>
+				<?php
+				}
 				?>
 				<div class="row">
 					<form name="EditUser" action="editUser.php" method="post">
@@ -95,6 +104,7 @@
 										<th>imię</th>
 										<th>nazwisko</th>
 										<th>login</th>
+										<th>admin</th>
 									</tr>
 									<?php
 									if(!isset($_GET['p']) || !is_numeric($_GET['p'])){
@@ -114,6 +124,7 @@
 											echo"<td>$row[2]</td>";
 											echo"<td>$row[3]</td>";
 											echo"<td>$row[1]</td>";
+											echo"<td>",($row[4] == 1 ? '&check;' : ''),"</td>";
 											echo"</tr>";
 										}
 									}
@@ -136,6 +147,7 @@
 						<div class="col-md-3 col-md-offset-1 col-sm-10 col-sm-offset-1">
 							<div class="well">
 								<button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#addUserModal">Dodaj</button>
+								<button type="submit" class="btn btn-default btn-block" name="editType" value="edit">Edytuj</button>
 								<button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#deleteUserModal">Usuń</button>
 							</div>
 						</div>
@@ -192,6 +204,62 @@
 			</form>
 		</div>
 	</div>
+	
+	<?php
+	if(isset($_SESSION['tmp']) && $_SESSION['tmp'] == 'editCallback'){
+		$_SESSION['tmp'] = '';
+		$data = $_SESSION['data'];
+		$_SESSION['data'] = '';
+		$row = mysql_fetch_row(mysql_query("SELECT id_uzytkownik, login, haslo, imie, nazwisko, admin FROM `Uzytkownicy` WHERE login='$data'"));
+	?>
+	
+	<script type="text/javascript">
+		$(window).load(function(){
+			$('#editUserModal').modal('show');
+		});
+	</script>
+	
+	<form action="editUser.php" method="post">
+		<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModal" aria-hidden="true">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-body">
+						<form name="form-edycja" action="editUser.php" method="post">
+							<input hidden="true" type="text" name="oldLogin" value="<?php echo($data); ?>">
+							<div class="form-group">
+								<label for="LoginInput">Login</label>
+								<input type="text" class="form-control" placeholder="Wprowadź login" value="<?php echo($row[1]); ?>" name="login">
+							</div>
+							<div class="form-group">
+								<label for="PasswordInput">Hasło</label>
+								<input type="password" class="form-control" placeholder="Wprowadź hasło" value="<?php echo($row[2]); ?>" name="password">
+							</div>
+							<div class="form-group">
+								<label for="LoginInput">Imię</label>
+								<input type="text" class="form-control" placeholder="Wprowadź imię" value="<?php echo($row[3]); ?>" name="name">
+							</div>
+							<div class="form-group">
+								<label for="LoginInput">Nazwisko</label>
+								<input type="text" class="form-control" placeholder="Wprowadź nazwisko" value="<?php echo($row[4]); ?>" name="surename">
+							</div>
+							<div class="form-group">
+								<label for="AdminInput">Admin</label>
+								<input type="checkbox" name="admin" <?php if($row[5] == TRUE) echo('checked'); ?>>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Anuluj</button>
+						<button name="editType" value="saveEdit" type="submit" class="btn btn-success">Zapisz</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	
+	<?php
+	}
+	?>
 	
 	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModal" aria-hidden="true">
 		<div class="modal-dialog modal-sm">
