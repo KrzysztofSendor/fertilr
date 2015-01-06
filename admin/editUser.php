@@ -3,7 +3,7 @@
 	require_once('../db.php');
 	
 	if($_SESSION['auth'] == TRUE && $_SESSION['admin'] == TRUE){
-		if($_POST['editType'] == 'delete') {		
+		if($_POST['editType'] == 'delete') {
 			if(!isset($_POST['UserSelect'])) {
 				$_SESSION['tmp'] = 'noData';
 			}
@@ -25,8 +25,12 @@
 				$password = md5($password);
 				$admin = 0;
 				if(isset($_POST['admin'])) $admin = 1;
-				$sql = "INSERT INTO `Uzytkownicy` (login, haslo, imie, nazwisko, admin) VALUES ('$login','$password','$imie','$nazwisko',$admin)";
-				$_SESSION['tmp'] = 'added';
+				$doubles = mysql_num_rows(mysql_query("SELECT login FROM Uzytkownicy WHERE login = '$login'"));
+				if($doubles > 0) $_SESSION['tmp'] = 'loginUsed';
+				else {
+					$sql = "INSERT INTO `Uzytkownicy` (login, haslo, imie, nazwisko, admin) VALUES ('$login','$password','$imie','$nazwisko',$admin)";
+					$_SESSION['tmp'] = 'added';
+				}
 			}
 		}
 		elseif($_POST['editType'] == 'edit') {
@@ -50,22 +54,25 @@
 				$nazwisko = $_POST['surename'];
 				$login = $_POST['login'];
 				$password = $_POST['password'];
-				$sql = mysql_fetch_array(mysql_query("SELECT haslo FROM Uzytkownicy WHERE login = '$oldLogin'"));
-				if($password != $sql[0]) $password = md5($password);
+				$oldpassword = mysql_fetch_array(mysql_query("SELECT haslo FROM Uzytkownicy WHERE login = '$oldLogin'"));
+				if($password != $oldpassword[0]) $password = md5($password);
 				$admin = 0;
 				if(isset($_POST['admin'])) $admin = 1;
-				$sql = "UPDATE Uzytkownicy SET imie='$imie', nazwisko='$nazwisko', login='$login', haslo='$password', admin='$admin' WHERE login='$oldLogin'";
-				$_SESSION['tmp'] = 'edited;';
+				if($login != $oldLogin) {
+					$doubles = mysql_num_rows(mysql_query("SELECT login FROM Uzytkownicy WHERE login = '$login'"));
+				}
+				if($doubles > 0) $_SESSION['tmp'] = 'loginUsed';
+				else {
+					$sql = "UPDATE Uzytkownicy SET imie='$imie', nazwisko='$nazwisko', login='$login', haslo='$password', admin='$admin' WHERE login='$oldLogin'";
+					$_SESSION['tmp'] = 'edited;';
+				}
 			}
 		}
-		
 		if(isset($sql))	mysql_query($sql);
-		header("Location: users.php");
+		if($_POST['editType'] == 'back') header("Location: ../admin.php");
+		else header("Location: users.php");
 	}
 	else{
 		header("Location: ../index.php");
 	}
-		
-		
-	
 ?>

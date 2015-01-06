@@ -91,6 +91,15 @@
 				</div>
 				<?php
 				}
+				elseif(isset($_SESSION['tmp']) && $_SESSION['tmp'] == 'loginUsed'){
+					$_SESSION['tmp'] = '';
+				?>
+				<div class="alert alert-danger alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<strong>Uwaga!</strong> Użytkownik o danym loginie już istnieje. 
+				</div>
+				<?php
+				}
 				?>
 				<div class="row">
 					<form name="EditUser" action="editUser.php" method="post">
@@ -99,12 +108,12 @@
 								<div class="panel-heading">Lista użytkowników</div>
 								<table class="table table-hover">
 									<tr>
-										<th></th>
-										<th>id.</th>
+										<th class="col-sm-1"></th>
+										<th class="col-sm-1">id.</th>
 										<th>imię</th>
 										<th>nazwisko</th>
 										<th>login</th>
-										<th>admin</th>
+										<th class="col-sm-1">admin</th>
 									</tr>
 									<?php
 									if(!isset($_GET['p']) || !is_numeric($_GET['p'])){
@@ -149,12 +158,16 @@
 								<button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#addUserModal">Dodaj</button>
 								<button type="submit" class="btn btn-default btn-block" name="editType" value="edit">Edytuj</button>
 								<button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#deleteUserModal">Usuń</button>
+								<button type="submit" class="btn btn-default btn-block" style="margin-top: 25px" name="editType" value="back">Wstecz</button>
 							</div>
 						</div>
 						<div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserModal" aria-hidden="true">
 							<div class="modal-dialog modal-sm">
 								<div class="modal-content">
 									<div class="modal-body">
+										<div class="alert alert-danger" role="alert">
+											<strong>Uwaga!</strong> Usunięcie użytkownika może spowodować nieodwracalne błędy.
+										</div>
 										Na pewno chcesz usunąć wybranego użytkownika?
 									</div>
 									<div class="modal-footer">
@@ -219,34 +232,32 @@
 		});
 	</script>
 	
-	<form action="editUser.php" method="post">
+	<form name="formEdit" action="editUser.php" method="post">
 		<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModal" aria-hidden="true">
 			<div class="modal-dialog modal-sm">
 				<div class="modal-content">
 					<div class="modal-body">
-						<form name="form-edycja" action="editUser.php" method="post">
-							<input hidden="true" type="text" name="oldLogin" value="<?php echo($data); ?>">
-							<div class="form-group">
-								<label for="LoginInput">Login</label>
-								<input type="text" class="form-control" placeholder="Wprowadź login" value="<?php echo($row[1]); ?>" name="login">
-							</div>
-							<div class="form-group">
-								<label for="PasswordInput">Hasło</label>
-								<input type="password" class="form-control" placeholder="Wprowadź hasło" value="<?php echo($row[2]); ?>" name="password">
-							</div>
-							<div class="form-group">
-								<label for="LoginInput">Imię</label>
-								<input type="text" class="form-control" placeholder="Wprowadź imię" value="<?php echo($row[3]); ?>" name="name">
-							</div>
-							<div class="form-group">
-								<label for="LoginInput">Nazwisko</label>
-								<input type="text" class="form-control" placeholder="Wprowadź nazwisko" value="<?php echo($row[4]); ?>" name="surename">
-							</div>
-							<div class="form-group">
-								<label for="AdminInput">Admin</label>
-								<input type="checkbox" name="admin" <?php if($row[5] == TRUE) echo('checked'); ?>>
-							</div>
-						</form>
+						<input hidden="true" type="text" name="oldLogin" value="<?php echo($data); ?>">
+						<div class="form-group">
+							<label for="LoginInput">Login</label>
+							<input type="text" class="form-control" placeholder="Wprowadź login" value="<?php echo($row[1]); ?>" name="login">
+						</div>
+						<div class="form-group">
+							<label for="PasswordInput">Hasło</label>
+							<input type="password" class="form-control" placeholder="Wprowadź hasło" value="<?php echo($row[2]); ?>" name="password">
+						</div>
+						<div class="form-group">
+							<label for="LoginInput">Imię</label>
+							<input type="text" class="form-control" placeholder="Wprowadź imię" value="<?php echo($row[3]); ?>" name="name">
+						</div>
+						<div class="form-group">
+							<label for="LoginInput">Nazwisko</label>
+							<input type="text" class="form-control" placeholder="Wprowadź nazwisko" value="<?php echo($row[4]); ?>" name="surename">
+						</div>
+						<div class="form-group">
+							<label for="AdminInput">Admin</label>
+							<input type="checkbox" name="admin" <?php if($row[5] == TRUE) echo('checked'); ?>>
+						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Anuluj</button>
