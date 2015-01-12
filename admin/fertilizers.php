@@ -106,14 +106,8 @@
 						<div class="col-md-8 col-sm-12">				
 							<div class="panel panel-default">
 								<div class="panel-heading">Lista nawozów</div>
-								<table class="table table-hover">
-									<tr>
-										<th class="col-sm-1"></th>
-										<th class="col-sm-1">id.</th>
-										<th>nazwa</th>
-									</tr>
-									<?php
-									if(!isset($_GET['p']) || !is_numeric($_GET['p'])){
+								<?php
+								if(!isset($_GET['p']) || !is_numeric($_GET['p'])){
 										$page = 0;
 									} else {
 										$page = (int)$_GET['p'];
@@ -121,18 +115,33 @@
 									$sql = mysql_query("SELECT id_nawozu, nazwa FROM `Nawozy` LIMIT $page, 10");
 									$num = mysql_num_rows($sql);
 									if($num>0){
+									?>
+									<table class="table table-hover">
+										<tr>
+											<th class="col-sm-1"></th>
+											<th class="col-sm-1">id.</th>
+											<th>nazwa</th>
+										</tr>
+										<?php
 										for($i=0; $i<$num; $i++){
 											$row = mysql_fetch_row($sql);
 											?>
-												<td><input type="radio" name="FertilizerSelect" id="FertilizerSelect<?php echo($i+1) ?>" value="<?php echo($row[1]) ?>"></td>
+											<td><input type="radio" name="FertilizerSelect" id="FertilizerSelect<?php echo($i+1) ?>" value="<?php echo($row[1]) ?>"></td>
 											<?php
 											echo"<td>$row[0]</td>";
 											echo"<td>$row[1]</td>";
 											echo"</tr>";
 										}
+										?>
+									</table>
+									<?php
+									}
+									else {
+										?>
+										<div class="text-center" style="margin:20px">Brak danych do wyświetlenia</div>
+										<?php
 									}
 									?>
-								</table>
 							</div>
 							<nav>
 								<ul class="pager">

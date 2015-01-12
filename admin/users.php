@@ -106,16 +106,7 @@
 						<div class="col-md-8 col-sm-12">				
 							<div class="panel panel-default">
 								<div class="panel-heading">Lista użytkowników</div>
-								<table class="table table-hover">
-									<tr>
-										<th class="col-sm-1"></th>
-										<th class="col-sm-1">id.</th>
-										<th>imię</th>
-										<th>nazwisko</th>
-										<th>login</th>
-										<th class="col-sm-1">admin</th>
-									</tr>
-									<?php
+								<?php
 									if(!isset($_GET['p']) || !is_numeric($_GET['p'])){
 										$page = 0;
 									} else {
@@ -124,10 +115,21 @@
 									$sql = mysql_query("SELECT id_uzytkownik, login, imie, nazwisko, admin FROM `Uzytkownicy` LIMIT $page, 10");
 									$num = mysql_num_rows($sql);
 									if($num>0){
+									?>
+									<table class="table table-hover">
+										<tr>
+											<th class="col-sm-1"></th>
+											<th class="col-sm-1">id.</th>
+											<th>imię</th>
+											<th>nazwisko</th>
+											<th>login</th>
+											<th class="col-sm-1">admin</th>
+										</tr>
+										<?php
 										for($i=0; $i<$num; $i++){
-											$row = mysql_fetch_row($sql);
+										$row = mysql_fetch_row($sql);
 											?>
-												<td><input type="radio" name="UserSelect" id="UserSelect<?php echo($i+1) ?>" value="<?php echo($row[1]) ?>"></td>
+											<td><input type="radio" name="UserSelect" id="UserSelect<?php echo($i+1) ?>" value="<?php echo($row[1]) ?>"></td>
 											<?php
 											echo"<td>$row[0]</td>";
 											echo"<td>$row[2]</td>";
@@ -136,9 +138,16 @@
 											echo"<td>",($row[4] == 1 ? '&check;' : ''),"</td>";
 											echo"</tr>";
 										}
+										?>
+									</table>
+									<?php
+									}
+									else {
+										?>
+										<div class="text-center" style="margin:20px">Brak danych do wyświetlenia</div>
+										<?php
 									}
 									?>
-								</table>
 							</div>
 							<nav>
 								<ul class="pager">
