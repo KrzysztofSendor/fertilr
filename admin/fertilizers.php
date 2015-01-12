@@ -141,7 +141,7 @@
 										else echo(active);
 									?>"><a href="fertilizers.php?p=<?php echo($page-10); ?>" aria-label="Previous"><span aria-hidden="true">&larr;</span> Poprzednie</a></li>
 									<li class="next <?php
-										if($page >= $num) echo(disabled);
+										if($page+10 > $num) echo(disabled);
 										else echo(active);
 									?>"><a href="fertilizers.php?p=<?php echo($page+10); ?>" aria-label="Next">Następne <span aria-hidden="true">&rarr;</span></a></li>
 								</ul>
