@@ -56,9 +56,9 @@
 										<tr>
 											<th class="col-sm-1"></th>
 											<th class="col-sm-1">id.</th>
-											<th>imię</th>
-											<th>nazwisko</th>
-											<th>login</th>
+											<th class="hidden-xs col-sm-3">imię</th>
+											<th class="hidden-xs col-sm-3">nazwisko</th>
+											<th class="col-xs-9 col-sm-3">login</th>
 											<th class="col-sm-1">admin</th>
 										</tr>
 										<?php
@@ -68,10 +68,10 @@
 											<td><input type="radio" name="UserSelect" id="UserSelect<?php echo($i+1) ?>" value="<?php echo($row[1]) ?>"></td>
 											<?php
 											echo"<td>$row[0]</td>";
-											echo"<td>$row[2]</td>";
-											echo"<td>$row[3]</td>";
+											echo"<td class='hidden-xs'>$row[2]</td>";
+											echo"<td class='hidden-xs'>$row[3]</td>";
 											echo"<td>$row[1]</td>";
-											echo"<td>",($row[4] == 1 ? '&check;' : ''),"</td>";
+											echo"<td class='text-center'>",($row[4] == 1 ? '&check;' : ''),"</td>";
 											echo"</tr>";
 										}
 										?>

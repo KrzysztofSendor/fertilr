@@ -54,9 +54,9 @@
 									?>
 									<table class="table table-hover">
 										<tr>
-											<th class="col-sm-1"></th>
-											<th class="col-sm-1">id.</th>
-											<th>nazwa</th>
+											<th class="col-xs-1"></th>
+											<th class="col-xs-1">id.</th>
+											<th class="col-xs-10">nazwa</th>
 										</tr>
 										<?php
 										for($i=0; $i<$num; $i++){
