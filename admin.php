@@ -42,9 +42,9 @@
 							 <button type="submit" class="btn btn-default btn-lg btn-block" onclick="location.href='admin/users.php'">Użytkownicy</button>
 							 <button type="submit" class="btn btn-default btn-lg btn-block" onclick="location.href='admin/fertilizers.php'">Nawozy</button>
 							 <button type="submit" class="btn btn-default btn-lg btn-block" onclick="location.href='admin/plants.php'">Rośliny</button>
-							 <button type="submit" class="btn btn-default btn-lg btn-block" onclick="location.href='#'">Rośliny</button>
-							 <button type="submit" class="btn btn-default btn-lg btn-block" onclick="location.href='#'">Rośliny</button>
-							 <button type="submit" class="btn btn-default btn-lg btn-block" onclick="location.href='#'">Rośliny</button>
+							 <button type="submit" class="btn btn-default btn-lg btn-block" onclick="location.href='#'">#</button>
+							 <button type="submit" class="btn btn-default btn-lg btn-block" onclick="location.href='#'">#</button>
+							 <button type="submit" class="btn btn-default btn-lg btn-block" onclick="location.href='#'">#</button>
 						</div>
 					</div>
 					<div class="col-md-6 col-sm-12">
