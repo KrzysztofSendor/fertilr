@@ -14,7 +14,7 @@
 </head>
 <body>
 	<?php
-		if($_SESSION['auth'] == TRUE && $_SESSION['admin'] == TRUE){
+		if(isset($_SESSION['auth']) && $_SESSION['auth'] == TRUE && isset($_SESSION['admin']) && $_SESSION['admin'] == TRUE){
 			$imie = mysql_fetch_array(mysql_query("SELECT imie FROM `Uzytkownicy` WHERE `login` = '".$_SESSION['user']."'"));
 			$imie = $imie[0];
 			$nazwisko = mysql_fetch_array(mysql_query("SELECT nazwisko FROM `Uzytkownicy` WHERE `login` = '".$_SESSION['user']."'"));
@@ -36,71 +36,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-offset-1 col-md-10 col-sm-12">
-				<?php
-				if(isset($_SESSION['tmp']) && $_SESSION['tmp'] == 'deleted'){
-				$_SESSION['tmp'] = '';
-				?>
-				<div class="alert alert-success alert-dismissible" role="alert">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<strong>Sukcess!</strong> Usunięto użytkownika.
-				</div>
-				<?php
-				}
-				elseif(isset($_SESSION['tmp']) && $_SESSION['tmp'] == 'ups'){
-				$_SESSION['tmp'] = '';
-				?>
-				<div class="alert alert-warning alert-dismissible" role="alert">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<strong>Ups!</strong> Coś poszło nie tak.
-				</div>
-				<?php
-				}
-				elseif(isset($_SESSION['tmp']) && $_SESSION['tmp'] == 'noData'){
-				$_SESSION['tmp'] = '';
-				?>
-				<div class="alert alert-danger alert-dismissible" role="alert">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<strong>Uwaga!</strong> Nie wybrałeś użytkownika. Żaden użytkownik nie został usunięty. 
-				</div>
-				<?php
-				}
-				elseif(isset($_SESSION['tmp']) && $_SESSION['tmp'] == 'added'){
-					$_SESSION['tmp'] = '';
-				?>
-				<div class="alert alert-success alert-dismissible" role="alert">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<strong>Sukces!</strong> Dodano użytkownika.
-				</div>
-				<?php
-				}
-				elseif(isset($_SESSION['tmp']) && $_SESSION['tmp'] == 'noAddData'){
-					$_SESSION['tmp'] = '';
-				?>
-				<div class="alert alert-danger alert-dismissible" role="alert">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<strong>Uwaga!</strong> Nie wprowadzono wymaganych danych. Użytkownik nie został dodany.
-				</div>
-				<?php
-				}
-				elseif(isset($_SESSION['tmp']) && $_SESSION['tmp'] == 'edited'){
-					$_SESSION['tmp'] = '';
-				?>
-				<div class="alert alert-success alert-dismissible" role="alert">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<strong>Sukces!</strong> Dane użytkownika zostały zmienione.
-				</div>
-				<?php
-				}
-				elseif(isset($_SESSION['tmp']) && $_SESSION['tmp'] == 'loginUsed'){
-					$_SESSION['tmp'] = '';
-				?>
-				<div class="alert alert-danger alert-dismissible" role="alert">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<strong>Uwaga!</strong> Użytkownik o danym loginie już istnieje. 
-				</div>
-				<?php
-				}
-				?>
+				<?php require_once('errors.php'); ?>
 				<div class="row">
 					<form name="EditUser" action="editUser.php" method="post">
 						<div class="col-md-8 col-sm-12">				
@@ -296,10 +232,10 @@
 	</div>
 	
 	<?php
+	mysql_close();
 	} else {
 		header("Location: index.php");
 	}
-	mysql_close();
 	?>
 </body>
 </html>

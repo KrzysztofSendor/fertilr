@@ -36,71 +36,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-offset-1 col-md-10 col-sm-12">
-				<?php
-				if(isset($_SESSION['tmp']) && $_SESSION['tmp'] == 'deleted'){
-				$_SESSION['tmp'] = '';
-				?>
-				<div class="alert alert-success alert-dismissible" role="alert">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<strong>Sukcess!</strong> Usunięto nawóz.
-				</div>
-				<?php
-				}
-				elseif(isset($_SESSION['tmp']) && $_SESSION['tmp'] == 'ups'){
-				$_SESSION['tmp'] = '';
-				?>
-				<div class="alert alert-warning alert-dismissible" role="alert">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<strong>Ups!</strong> Coś poszło nie tak.
-				</div>
-				<?php
-				}
-				elseif(isset($_SESSION['tmp']) && $_SESSION['tmp'] == 'noData'){
-				$_SESSION['tmp'] = '';
-				?>
-				<div class="alert alert-danger alert-dismissible" role="alert">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<strong>Uwaga!</strong> Żaden nawóz nie został wybrany.
-				</div>
-				<?php
-				}
-				elseif(isset($_SESSION['tmp']) && $_SESSION['tmp'] == 'added'){
-					$_SESSION['tmp'] = '';
-				?>
-				<div class="alert alert-success alert-dismissible" role="alert">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<strong>Sukces!</strong> Dodano nawóz.
-				</div>
-				<?php
-				}
-				elseif(isset($_SESSION['tmp']) && $_SESSION['tmp'] == 'noAddData'){
-					$_SESSION['tmp'] = '';
-				?>
-				<div class="alert alert-danger alert-dismissible" role="alert">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<strong>Uwaga!</strong> Nie wprowadzono wymaganych danych. Nawóz nie został dodany.
-				</div>
-				<?php
-				}
-				elseif(isset($_SESSION['tmp']) && $_SESSION['tmp'] == 'edited'){
-					$_SESSION['tmp'] = '';
-				?>
-				<div class="alert alert-success alert-dismissible" role="alert">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<strong>Sukces!</strong> Nazwa nawozu została zmieniona.
-				</div>
-				<?php
-				}
-				elseif(isset($_SESSION['tmp']) && $_SESSION['tmp'] == 'nameUsed'){
-					$_SESSION['tmp'] = '';
-				?>
-				<div class="alert alert-danger alert-dismissible" role="alert">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<strong>Uwaga!</strong> Nawóz o danej nazwie już istnieje. 
-				</div>
-				<?php
-				}
-				?>
+				<?php require_once('errors.php'); ?>
 				<div class="row">
 					<form name="EditUser" action="editFertilizer.php" method="post">
 						<div class="col-md-8 col-sm-12">				
@@ -256,12 +192,11 @@
 			</div>
 		</div>
 	</div>
-	
 	<?php
+	mysql_close();
 	} else {
 		header("Location: index.php");
 	}
-	mysql_close();
 	?>
 </body>
 </html>

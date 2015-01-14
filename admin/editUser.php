@@ -5,17 +5,17 @@
 	if($_SESSION['auth'] == TRUE && $_SESSION['admin'] == TRUE){
 		if($_POST['editType'] == 'delete') {
 			if(!isset($_POST['UserSelect'])) {
-				$_SESSION['tmp'] = 'noData';
+				$_SESSION['tmp'] = 'noDataUser';
 			}
 			else {
 				$user = $_POST['UserSelect'];
 				$sql = "DELETE FROM `Uzytkownicy` WHERE login='$user'";
-				$_SESSION['tmp'] = 'deleted';
+				$_SESSION['tmp'] = 'deletedUser';
 			}
 		}
 		elseif($_POST['editType'] == 'add') {
 			if(($_POST['name'] == '') || ($_POST['surename'] == '') || ($_POST['login'] == '') || ($_POST['password']) == ''){
-				$_SESSION['tmp'] = 'noAddData';
+				$_SESSION['tmp'] = 'noAddDataUser';
 			}
 			else {
 				$imie = $_POST['name'];
@@ -29,13 +29,13 @@
 				if($doubles > 0) $_SESSION['tmp'] = 'loginUsed';
 				else {
 					$sql = "INSERT INTO `Uzytkownicy` (login, haslo, imie, nazwisko, admin) VALUES ('$login','$password','$imie','$nazwisko',$admin)";
-					$_SESSION['tmp'] = 'added';
+					$_SESSION['tmp'] = 'addedUser';
 				}
 			}
 		}
 		elseif($_POST['editType'] == 'edit') {
 			if(!isset($_POST['UserSelect'])) {
-				$_SESSION['tmp'] = 'noData';
+				$_SESSION['tmp'] = 'noDataUser';
 			}
 			else {
 				$user = $_POST['UserSelect'];
@@ -46,7 +46,7 @@
 		}
 		elseif($_POST['editType'] == 'saveEdit'){
 			if(($_POST['name'] == '') || ($_POST['surename'] == '') || ($_POST['login'] == '') || ($_POST['password']) == ''){
-				$_SESSION['tmp'] = 'noAddData';
+				$_SESSION['tmp'] = 'noAddDataUser';
 			}
 			else {
 				$oldLogin = $_POST['oldLogin'];
@@ -64,7 +64,7 @@
 				if($doubles > 0) $_SESSION['tmp'] = 'loginUsed';
 				else {
 					$sql = "UPDATE Uzytkownicy SET imie='$imie', nazwisko='$nazwisko', login='$login', haslo='$password', admin='$admin' WHERE login='$oldLogin'";
-					$_SESSION['tmp'] = 'edited;';
+					$_SESSION['tmp'] = 'editedUser';
 				}
 			}
 		}
