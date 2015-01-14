@@ -4,11 +4,11 @@
 	
 	if($_SESSION['auth'] == TRUE && $_SESSION['admin'] == TRUE){
 		if($_POST['editType'] == 'delete') {		
-			if(!isset($_POST['FertilizerSelect'])) {
+			if(!isset($_POST['elementSelect'])) {
 				$_SESSION['tmp'] = 'noData';
 			}
 			else {
-				$name = $_POST['FertilizerSelect'];
+				$name = $_POST['elementSelect'];
 				$sql = "DELETE FROM `Nawozy` WHERE nazwa='$name'";
 				$_SESSION['tmp'] = 'deleted';
 			}
@@ -28,11 +28,11 @@
 			}
 		}
 		elseif($_POST['editType'] == 'edit') {
-			if(!isset($_POST['FertilizerSelect'])) {
+			if(!isset($_POST['elementSelect'])) {
 				$_SESSION['tmp'] = 'noData';
 			}
 			else {
-				$name = $_POST['FertilizerSelect'];
+				$name = $_POST['elementSelect'];
 				$_SESSION['data'] = $name;
 				$_SESSION['tmp'] = 'editCallback';
 				header("Location: fertilizers.php");

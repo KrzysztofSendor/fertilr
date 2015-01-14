@@ -38,7 +38,7 @@
 			<div class="col-md-offset-1 col-md-10 col-sm-12">
 				<?php require_once('errors.php'); ?>
 				<div class="row">
-					<form name="EditUser" action="editFertilizer.php" method="post">
+					<form name="EditElement" action="editFertilizer.php" method="post">
 						<div class="col-md-8 col-sm-12">				
 							<div class="panel panel-default">
 								<div class="panel-heading">Lista nawozów</div>
@@ -62,7 +62,7 @@
 										for($i=0; $i<$num; $i++){
 											$row = mysql_fetch_row($sql);
 											?>
-											<td><input type="radio" name="FertilizerSelect" id="FertilizerSelect<?php echo($i+1) ?>" value="<?php echo($row[1]) ?>"></td>
+											<td><input type="radio" name="elementSelect" id="elementSelect<?php echo($i+1) ?>" value="<?php echo($row[1]) ?>"></td>
 											<?php
 											echo"<td>$row[0]</td>";
 											echo"<td>$row[1]</td>";
