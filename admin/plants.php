@@ -84,11 +84,11 @@
 									<li class="previous <?php 
 										if($page==0) echo(disabled);
 										else echo(active);
-									?>"><a href="fertilizers.php?p=<?php echo($page-10); ?>" aria-label="Previous"><span aria-hidden="true">&larr;</span> Poprzednie</a></li>
+									?>"><a href="plants.php?p=<?php echo($page-10); ?>" aria-label="Previous"><span aria-hidden="true">&larr;</span> Poprzednie</a></li>
 									<li class="next <?php
 										if($page+10 > $num) echo(disabled);
 										else echo(active);
-									?>"><a href="fertilizers.php?p=<?php echo($page+10); ?>" aria-label="Next">Następne <span aria-hidden="true">&rarr;</span></a></li>
+									?>"><a href="plants.php?p=<?php echo($page+10); ?>" aria-label="Next">Następne <span aria-hidden="true">&rarr;</span></a></li>
 								</ul>
 							</nav>
 						</div>
@@ -146,7 +146,7 @@
 		$_SESSION['tmp'] = '';
 		$data = $_SESSION['data'];
 		$_SESSION['data'] = '';
-		$row = mysql_fetch_row(mysql_query("SELECT id_rosliny, nazwa FROM Nawozy WHERE nazwa='$data'"));
+		$row = mysql_fetch_row(mysql_query("SELECT id_rosliny, nazwa FROM Rosliny WHERE nazwa='$data'"));
 	?>
 	
 	<script type="text/javascript">
