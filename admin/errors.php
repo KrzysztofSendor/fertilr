@@ -19,6 +19,15 @@ if(isset($_SESSION['auth']) && $_SESSION['auth'] == TRUE && isset($_SESSION['adm
 	</div>
 	<?php
 	}
+	elseif(isset($_SESSION['tmp']) && $_SESSION['tmp'] == 'activeDelete'){
+	$_SESSION['tmp'] = '';
+	?>
+	<div class="alert alert-danger alert-dismissible" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<strong>Uwaga!</strong> Nie można usunąć aktywnego użytkownika.  
+	</div>
+	<?php
+	}
 	elseif(isset($_SESSION['tmp']) && $_SESSION['tmp'] == 'addedUser'){
 		$_SESSION['tmp'] = '';
 	?>
@@ -116,6 +125,15 @@ if(isset($_SESSION['auth']) && $_SESSION['auth'] == TRUE && isset($_SESSION['adm
 	<div class="alert alert-danger alert-dismissible" role="alert">
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		<strong>Uwaga!</strong> Element o danej nazwie już istnieje. 
+	</div>
+	<?php
+	}
+	elseif(isset($_SESSION['tmp']) && $_SESSION['tmp'] == 'wrongDataType'){
+		$_SESSION['tmp'] = '';
+	?>
+	<div class="alert alert-danger alert-dismissible" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<strong>Uwaga!</strong> Błędny typ wprowadzanych danych. 
 	</div>
 	<?php
 	}

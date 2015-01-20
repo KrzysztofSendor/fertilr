@@ -7,6 +7,9 @@
 			if(!isset($_POST['UserSelect'])) {
 				$_SESSION['tmp'] = 'noDataUser';
 			}
+			if($_POST['UserSelect'] == $_SESSION['user']) {
+				$_SESSION['tmp'] = 'activeDelete';
+			}
 			else {
 				$user = $_POST['UserSelect'];
 				$sql = "DELETE FROM `Uzytkownicy` WHERE login='$user'";
