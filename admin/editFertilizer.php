@@ -46,7 +46,7 @@
 				$oldName = $_POST['oldName'];
 				$name = $_POST['name'];
 				if($name != $oldName) {
-					$doubles = mysql_num_rows(mysql_query("SELECT name FROM Fertilizers WHERE name = '$name'"));
+					$doubles = mysql_num_rows(mysql_query("SELECT name FROM Nawozy WHERE name = '$name'"));
 				}
 				if($doubles > 0) $_SESSION['tmp'] = 'nameUsed';
 				else {
