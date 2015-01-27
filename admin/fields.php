@@ -63,6 +63,7 @@
 										for($i=0; $i<$num; $i++){
 											$row = mysql_fetch_row($sql);
 											?>
+											<tr>
 											<td><input type="radio" name="elementSelect" id="elementSelect<?php echo($i+1) ?>" value="<?php echo($row[1]) ?>"></td>
 											<?php
 											echo"<td>$row[0]</td>";
@@ -86,11 +87,11 @@
 									<li class="previous <?php 
 										if($page==0) echo(disabled);
 										else echo(active);
-									?>"><a href="plants.php?p=<?php echo($page-10); ?>" aria-label="Previous"><span aria-hidden="true">&larr;</span> Poprzednie</a></li>
+									?>"><a href="fields.php?p=<?php echo($page-10); ?>" aria-label="Previous"><span aria-hidden="true">&larr;</span> Poprzednie</a></li>
 									<li class="next <?php
 										if($page+10 > $num) echo(disabled);
 										else echo(active);
-									?>"><a href="plants.php?p=<?php echo($page+10); ?>" aria-label="Next">Następne <span aria-hidden="true">&rarr;</span></a></li>
+									?>"><a href="fields.php?p=<?php echo($page+10); ?>" aria-label="Next">Następne <span aria-hidden="true">&rarr;</span></a></li>
 								</ul>
 							</nav>
 						</div>

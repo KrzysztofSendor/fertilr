@@ -65,6 +65,7 @@
 										for($i=0; $i<$num; $i++){
 										$row = mysql_fetch_row($sql);
 											?>
+											<tr>
 											<td><input type="radio" name="UserSelect" id="UserSelect<?php echo($i+1) ?>" value="<?php echo($row[1]) ?>"></td>
 											<?php
 											echo"<td>$row[0]</td>";
