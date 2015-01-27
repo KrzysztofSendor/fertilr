@@ -43,7 +43,8 @@
 							 <button type="submit" class="btn btn-default btn-lg btn-block" onclick="location.href='admin/fertilizers.php'">Nawozy</button>
 							 <button type="submit" class="btn btn-default btn-lg btn-block" onclick="location.href='admin/plants.php'">Rośliny</button>
 							 <button type="submit" class="btn btn-default btn-lg btn-block" onclick="location.href='admin/fields.php'">Pola</button>
-							 <button type="submit" class="btn btn-default btn-lg btn-block" onclick="location.href='#'">#</button>
+							 <button type="submit" class="btn btn-default btn-lg btn-block" onclick="location.href='admin/experiments.php'">Doświadczenia</button>
+							 <button type="submit" class="btn btn-default btn-lg btn-block" onclick="location.href='admin/measurements.php'">Pomiary</button>
 						</div>
 					</div>
 					<div class="col-md-6 col-sm-12">
