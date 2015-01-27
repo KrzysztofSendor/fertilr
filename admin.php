@@ -48,8 +48,19 @@
 						</div>
 					</div>
 					<div class="col-md-6 col-sm-12">
-						<h2>Statystyki</h2>
-						<p>Tu pojawią się statystyki</p>
+						<h2>Informacje</h2>
+						<p>
+							<dl class="dl-horizontal">
+								<dt>autor strony</dt>
+								<dd>Krzysztof Sendor</dd>
+								<dt>adres email</dt>
+								<dd>sendor.krzysztof@gmail.com</dd>
+								<dt>data rozpoczęcia</dt>
+								<dd>26-12-2014</dd>
+								<dt>data zakończenia</dt>
+								<dd>25-01-2015</dd>
+							</dl>
+						</p>
 					</div>
 				</div>
 			</div>
