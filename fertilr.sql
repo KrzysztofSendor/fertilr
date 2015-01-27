@@ -23,21 +23,74 @@ DROP TABLE IF EXISTS `Doswiadczenia`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Doswiadczenia` (
-  `id_doswiadczenie` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id_doswiadczenia` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `nazwa` varchar(128) NOT NULL,
   `data_rozpoczecia` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `data_zakonczenia` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id_doswiadczenie`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id_pola` int(11) NOT NULL,
+  PRIMARY KEY (`id_doswiadczenia`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Doswiadczenia`
+-- Table structure for table `Doswiadczenia_Nawozy`
 --
 
-LOCK TABLES `Doswiadczenia` WRITE;
-/*!40000 ALTER TABLE `Doswiadczenia` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Doswiadczenia` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `Doswiadczenia_Nawozy`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Doswiadczenia_Nawozy` (
+  `id_doswiadczenia_nawozy` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id_doswiadczenia` int(11) NOT NULL,
+  `id_nawozu` int(11) NOT NULL,
+  PRIMARY KEY (`id_doswiadczenia_nawozy`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `Nawozy`
+--
+
+DROP TABLE IF EXISTS `Nawozy`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Nawozy` (
+  `id_nawozu` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `nazwa` varchar(128) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id_nawozu`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `Obszary`
+--
+
+DROP TABLE IF EXISTS `Obszary`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Obszary` (
+  `id_obszaru` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `rozmiar` float NOT NULL,
+  `id_doswiadczenia` int(11) NOT NULL,
+  `id_rosliny` int(11) NOT NULL,
+  PRIMARY KEY (`id_obszaru`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `Pola`
+--
+
+DROP TABLE IF EXISTS `Pola`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Pola` (
+  `id_pola` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `nazwa` varchar(128) NOT NULL DEFAULT '',
+  `rozmiar` float NOT NULL,
+  PRIMARY KEY (`id_pola`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `Pomiary`
@@ -47,24 +100,28 @@ DROP TABLE IF EXISTS `Pomiary`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Pomiary` (
-  `id_pomiar` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `id_laborant` int(11) unsigned NOT NULL,
-  `id_obszar` int(11) unsigned NOT NULL,
-  `pomiar` double DEFAULT NULL,
-  `data_pomiaru` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_pomiar`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `id_pomiaru` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id_obszaru` int(11) unsigned NOT NULL,
+  `id_uzytkownika` int(11) unsigned NOT NULL,
+  `pomiar` int(11) unsigned NOT NULL,
+  `data_pomiaru` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_pomiaru`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Pomiary`
+-- Table structure for table `Rosliny`
 --
 
-LOCK TABLES `Pomiary` WRITE;
-/*!40000 ALTER TABLE `Pomiary` DISABLE KEYS */;
-INSERT INTO `Pomiary` VALUES (1,1,1,13.5,'2014-12-25 18:10:23'),(2,2,4,15.9,'2014-12-25 18:16:44');
-/*!40000 ALTER TABLE `Pomiary` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `Rosliny`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Rosliny` (
+  `id_rosliny` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `nazwa` varchar(128) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id_rosliny`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `Uzytkownicy`
@@ -81,15 +138,16 @@ CREATE TABLE `Uzytkownicy` (
   `nazwisko` varchar(128) DEFAULT NULL,
   `admin` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id_uzytkownik`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
---
--- Dumping data for table `Uzytkownicy`
---
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-LOCK TABLES `Uzytkownicy` WRITE;
-/*!40000 ALTER TABLE `Uzytkownicy` DISABLE KEYS */;
-INSERT INTO `Uzytkownicy` VALUES (1,'admin','21232f297a57a5a743894a0e4a801fc3','Krzysztof','Sendor',1);
-/*!40000 ALTER TABLE `Uzytkownicy` ENABLE KEYS */;
-UNLOCK TABLES;
+-- Dump completed on 2015-01-27 14:54:23
