@@ -137,6 +137,15 @@ if(isset($_SESSION['auth']) && $_SESSION['auth'] == TRUE && isset($_SESSION['adm
 	</div>
 	<?php
 	}
+	elseif(isset($_SESSION['tmp']) && $_SESSION['tmp'] == 'toBig'){
+		$_SESSION['tmp'] = '';
+	?>
+	<div class="alert alert-danger alert-dismissible" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<strong>Uwaga!</strong> Suma obszarów zbyt duża dla wybranego pola. Nie utworzono obiektu. 
+	</div>
+	<?php
+	}
 } else {
 	header("Location: ../index.php");
 }
